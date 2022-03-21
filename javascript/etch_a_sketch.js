@@ -5,6 +5,8 @@ document.body.appendChild(divSketchContainer);
 const divGridRow = document.createElement('div');
 divGridRow.classList.add('grid-row');
 
+divSketchContainer.addEventListener('mouseover', event => event.target.style.backgroundColor = "pink");
+
 const divGridElement = document.createElement('div');
 divGridElement.classList.add('grid-element');
 
@@ -17,4 +19,4 @@ for (let i = 0; i < 15; ++i) {
 
 for (let i = 0; i < 15; ++i) {
     divSketchContainer.appendChild(divGridRow.cloneNode(true));
-}
+};
