@@ -21,19 +21,19 @@ for (let i = 0; i < 15; ++i) {
     divSketchContainer.appendChild(divGridRow.cloneNode(true));
 };
 
-let doubleClicked = true;
+let toggleDraw = true;
 
 function draw(event) {
     event.target.style.backgroundColor = "pink";
 }
 
 divSketchContainer.addEventListener('dblclick', () => {
-    if (doubleClicked) {
-        doubleClicked = false;
+    if (toggleDraw) {
+        toggleDraw = false;
         divSketchContainer.addEventListener('mouseover', draw);
     }
     else {
         divSketchContainer.removeEventListener('mouseover', draw);
-        doubleClicked = true;
+        toggleDraw = true;
     }
 });
