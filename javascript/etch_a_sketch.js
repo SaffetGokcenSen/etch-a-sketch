@@ -37,3 +37,20 @@ divSketchContainer.addEventListener('dblclick', () => {
         toggleDraw = true;
     }
 });
+
+const divInfoContainer = document.createElement('div');
+divInfoContainer.classList.add('info-container');
+document.body.appendChild(divInfoContainer);
+
+const divDrawingInfoContainer = document.createElement('div');
+divDrawingInfoContainer.classList.add('drawing-info');
+divInfoContainer.appendChild(divDrawingInfoContainer);
+divDrawingInfoContainer.textContent = "Double click on a grid to start drawing and double click on a grid to finish drawing."
+
+const divResolutionInfoContainer = document.createElement('div');
+divResolutionInfoContainer.classList.add('resolution-info');
+divInfoContainer.appendChild(divResolutionInfoContainer);
+
+const button = document.createElement('button');
+button.textContent = "Click to set the resolution of the grid";
+divResolutionInfoContainer.appendChild(button);
