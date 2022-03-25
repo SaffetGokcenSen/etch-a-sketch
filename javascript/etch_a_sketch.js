@@ -52,5 +52,14 @@ divResolutionInfoContainer.classList.add('resolution-info');
 divInfoContainer.appendChild(divResolutionInfoContainer);
 
 const button = document.createElement('button');
-button.textContent = "Click to set the resolution of the grid";
+button.textContent = "Click to reset the resolution of the grid";
 divResolutionInfoContainer.appendChild(button);
+button.addEventListener('click', () => {
+    while (divSketchContainer.firstChild) {
+        divSketchContainer.removeChild(divSketchContainer.firstChild);
+    }
+    setTimeout( () => {
+        let thePrompt = "Please enter the number of squares per side for the new grid. It must be less than or equal to 100.";
+        numOfRowGrids = prompt(thePrompt, "16")
+    }, 0);
+});
