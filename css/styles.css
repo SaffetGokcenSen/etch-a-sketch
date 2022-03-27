@@ -39,8 +39,6 @@ button {
 
 .grid-row {
     display: flex;
-    height: 60px;
-    width: 960px;
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
@@ -48,7 +46,6 @@ button {
 
 .grid-element {
     border: 0.1px solid green;
-    width: 60px;
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
