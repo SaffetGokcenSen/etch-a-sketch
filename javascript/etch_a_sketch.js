@@ -5,10 +5,13 @@ document.body.appendChild(divSketchContainer);
 const divGridRow = document.createElement('div');
 divGridRow.classList.add('grid-row');
 
-
+divGridRow.style.height = "60px";
+divGridRow.style.width = "960px";
 
 const divGridElement = document.createElement('div');
 divGridElement.classList.add('grid-element');
+
+divGridElement.style.width = "60px";
 
 divSketchContainer.appendChild(divGridRow);
 
