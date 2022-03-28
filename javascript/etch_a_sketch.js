@@ -6,7 +6,6 @@ const divGridRow = document.createElement('div');
 divGridRow.classList.add('grid-row');
 
 divGridRow.style.height = "60px";
-divGridRow.style.width = "960px";
 
 const divGridElement = document.createElement('div');
 divGridElement.classList.add('grid-element');
@@ -57,12 +56,32 @@ divInfoContainer.appendChild(divResolutionInfoContainer);
 const button = document.createElement('button');
 button.textContent = "Click to reset the resolution of the grid";
 divResolutionInfoContainer.appendChild(button);
+
+let numOfRowGrids;
 button.addEventListener('click', () => {
+    while (divGridRow.firstChild) {
+        divGridRow.removeChild(divGridRow.firstChild);
+    }
     while (divSketchContainer.firstChild) {
         divSketchContainer.removeChild(divSketchContainer.firstChild);
     }
     setTimeout( () => {
         let thePrompt = "Please enter the number of squares per side for the new grid. It must be less than or equal to 100.";
-        numOfRowGrids = prompt(thePrompt, "16")
+        numOfRowGrids = prompt(thePrompt, "16");
+
+        let elementHeight = Math.floor(960 / (+numOfRowGrids));
+        divGridRow.style.height = `${elementHeight}px`;
+        divGridElement.style.width = `${elementHeight}px`;
+
+        divSketchContainer.appendChild(divGridRow);
+
+        divGridRow.appendChild(divGridElement);
+        for (let i = 0; i < (numOfRowGrids - 1); ++i) {
+            divGridRow.appendChild(divGridElement.cloneNode(true));    
+        };
+        
+        for (let i = 0; i < (numOfRowGrids - 1); ++i) {
+            divSketchContainer.appendChild(divGridRow.cloneNode(true));
+        };
     }, 0);
 });
