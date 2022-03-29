@@ -15,6 +15,7 @@ divGridElement.style.width = "60px";
 divSketchContainer.appendChild(divGridRow);
 
 divGridRow.appendChild(divGridElement);
+
 for (let i = 0; i < 15; ++i) {
     divGridRow.appendChild(divGridElement.cloneNode(true));    
 };
@@ -57,7 +58,7 @@ const button = document.createElement('button');
 button.textContent = "Click to reset the resolution of the grid";
 divResolutionInfoContainer.appendChild(button);
 
-let numOfRowGrids;
+let numOfRowGrids, numOfRowGridsPrompt;
 button.addEventListener('click', () => {
     while (divGridRow.firstChild) {
         divGridRow.removeChild(divGridRow.firstChild);
@@ -67,7 +68,12 @@ button.addEventListener('click', () => {
     }
     setTimeout( () => {
         let thePrompt = "Please enter the number of squares per side for the new grid. It must be less than or equal to 100.";
-        numOfRowGrids = prompt(thePrompt, "16");
+        numOfRowGridsPrompt = prompt(thePrompt, "16");
+        if (numOfRowGridsPrompt === null) {
+            numOfRowGridsPrompt = numOfRowGrids;
+        }
+
+        numOfRowGrids = numOfRowGridsPrompt;
 
         let elementHeight = Math.floor(960 / (+numOfRowGrids));
         divGridRow.style.height = `${elementHeight}px`;
