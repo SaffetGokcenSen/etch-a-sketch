@@ -58,36 +58,41 @@ const button = document.createElement('button');
 button.textContent = "Click to reset the resolution of the grid";
 divResolutionInfoContainer.appendChild(button);
 
-let numOfRowGrids, numOfRowGridsPrompt;
-button.addEventListener('click', () => {
+function drawGrid() {
+    let numOfRowGrids, numOfRowGridsPrompt;
+    let thePrompt = "Please enter the number of squares per side for the new "
+    "grid. It must be less than or equal to 100.";
+    numOfRowGridsPrompt = prompt(thePrompt, "16");
+    if (numOfRowGridsPrompt === null) {
+        numOfRowGridsPrompt = numOfRowGrids;
+    }
+
+    numOfRowGrids = numOfRowGridsPrompt;
+
+    let elementHeight = Math.floor(960 / (+numOfRowGrids));
+    divGridRow.style.height = `${elementHeight}px`;
+    divGridElement.style.width = `${elementHeight}px`;
+
+    divSketchContainer.appendChild(divGridRow);
+
+    divGridRow.appendChild(divGridElement);
+    for (let i = 0; i < (numOfRowGrids - 1); ++i) {
+        divGridRow.appendChild(divGridElement.cloneNode(true));    
+    };
+        
+    for (let i = 0; i < (numOfRowGrids - 1); ++i) {
+        divSketchContainer.appendChild(divGridRow.cloneNode(true));
+    };
+}
+
+function resetAndDrawGrid() {
     while (divGridRow.firstChild) {
         divGridRow.removeChild(divGridRow.firstChild);
     }
     while (divSketchContainer.firstChild) {
         divSketchContainer.removeChild(divSketchContainer.firstChild);
     }
-    setTimeout( () => {
-        let thePrompt = "Please enter the number of squares per side for the new grid. It must be less than or equal to 100.";
-        numOfRowGridsPrompt = prompt(thePrompt, "16");
-        if (numOfRowGridsPrompt === null) {
-            numOfRowGridsPrompt = numOfRowGrids;
-        }
+    setTimeout(drawGrid, 0);
+}
 
-        numOfRowGrids = numOfRowGridsPrompt;
-
-        let elementHeight = Math.floor(960 / (+numOfRowGrids));
-        divGridRow.style.height = `${elementHeight}px`;
-        divGridElement.style.width = `${elementHeight}px`;
-
-        divSketchContainer.appendChild(divGridRow);
-
-        divGridRow.appendChild(divGridElement);
-        for (let i = 0; i < (numOfRowGrids - 1); ++i) {
-            divGridRow.appendChild(divGridElement.cloneNode(true));    
-        };
-        
-        for (let i = 0; i < (numOfRowGrids - 1); ++i) {
-            divSketchContainer.appendChild(divGridRow.cloneNode(true));
-        };
-    }, 0);
-});
+button.addEventListener('click', resetAndDrawGrid);
